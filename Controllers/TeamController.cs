@@ -54,7 +54,7 @@ namespace CaseStudyAppServer.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             var teamsList = await _teamRepo.GetAllAsync();

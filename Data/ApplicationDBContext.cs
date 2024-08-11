@@ -13,6 +13,7 @@ namespace CaseStudyAppServer.Data
         }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Token> Tokens { get; set; }
+        public DbSet<Upload> Uploads { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

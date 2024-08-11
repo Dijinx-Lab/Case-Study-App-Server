@@ -28,5 +28,8 @@ namespace CaseStudyAppServer.Constants
         public const string NameIsRequired = "Name is a required field";
         public const string TeamCodeIsRequired = "Team Code is a required field";
 
+        //UPLOAD
+        public const string FileIsRequired = "File is a required field";
+        public const string FileSizeLimit = "Max file size limit is 10MB";
     }
 }
