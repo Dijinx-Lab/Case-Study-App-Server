@@ -1,18 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using CaseStudyAppServer.Constants;
 using CaseStudyAppServer.Helpers;
 using CaseStudyAppServer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CaseStudyAppServer.Controllers
+namespace CaseStudyAppServer.Controllers.Admin
 {
     [ApiController]
-    [Route("api/v1/admin/upload")]
+    [Route(RouteConstants.UploadRoute)]
     public class UploadController : ControllerBase
     {
         private readonly IUploadService _uploadService;

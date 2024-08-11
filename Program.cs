@@ -17,17 +17,20 @@ using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<S3Utility>();
+
+
 builder.Services.AddControllers(
     options =>
     {
         options.Filters.Add(new RequestSizeLimitAttribute(10 * 1024 * 1024)); // 10MB limit
-    }
-)
-   .ConfigureApiBehaviorOptions(options =>
+    }).AddNewtonsoftJson(
+    options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    }).ConfigureApiBehaviorOptions(options =>
    {
        options.InvalidModelStateResponseFactory = context =>
        {
-           // Get the first error message from the model state dictionary
            var firstError = context.ModelState.Values
                .SelectMany(v => v.Errors)
                .Select(e => e.ErrorMessage)
@@ -98,6 +101,7 @@ builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddScoped<IUploadRepository, UploadRepository>();
+builder.Services.AddScoped<IFigureRepository, FigureRepository>();
 
 var app = builder.Build();
 

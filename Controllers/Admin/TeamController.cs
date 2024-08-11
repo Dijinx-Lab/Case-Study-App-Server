@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CaseStudyAppServer.Constants;
 using CaseStudyAppServer.Dtos.Team;
 using CaseStudyAppServer.Helpers;
@@ -11,10 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
-namespace CaseStudyAppServer.Controllers
+namespace CaseStudyAppServer.Controllers.Admin
 {
     [ApiController]
-    [Route("api/v1/admin/team")]
+    [Route(RouteConstants.TeamRoute)]
     public class TeamController : ControllerBase
     {
         private readonly ITeamRepository _teamRepo;
@@ -25,9 +21,9 @@ namespace CaseStudyAppServer.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([FromBody] CreateTeamDto createTeamDto)
+        public async Task<IActionResult> Create([FromBody] TeamRequestDto createTeamDto)
         {
-            if (createTeamDto.Name.IsNullOrEmpty()) return ResponseUtility.ReturnBadRequest(MessageConstants.NameIsRequired);
+            if (string.IsNullOrEmpty(createTeamDto.Name)) return ResponseUtility.ReturnBadRequest(MessageConstants.NameIsRequired);
             Team? createdTeam = await _teamRepo.CreateAsync(createTeamDto.Name);
             createdTeam = await _teamRepo.GetByCodeAsync(createdTeam.Code);
 
@@ -63,7 +59,7 @@ namespace CaseStudyAppServer.Controllers
 
         [HttpPut("{code}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Update([FromRoute] string code, [FromBody] CreateTeamDto createTeamDto)
+        public async Task<IActionResult> Update([FromRoute] string code, [FromBody] TeamRequestDto createTeamDto)
         {
             if (createTeamDto.Name.IsNullOrEmpty()) return ResponseUtility.ReturnBadRequest(MessageConstants.NameIsRequired);
 

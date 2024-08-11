@@ -29,7 +29,7 @@ namespace CaseStudyAppServer.Repositories
 
         public async Task<Upload?> DeleteAsync(int id)
         {
-            var existingUpload = await _context.Uploads.FirstOrDefaultAsync(x => x.Id == id);
+            var existingUpload = await _context.Uploads.FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
             if (existingUpload == null) return null;
 
             existingUpload.DeletedOn = DateTime.UtcNow;

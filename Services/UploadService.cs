@@ -3,7 +3,7 @@ using CaseStudyAppServer.Helpers;
 using CaseStudyAppServer.Interfaces;
 using CaseStudyAppServer.Models;
 
-namespace CaseStudyAppServer.Repositories
+namespace CaseStudyAppServer.Services
 {
     public class UploadService : IUploadService
     {

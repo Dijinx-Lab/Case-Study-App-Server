@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CaseStudyAppServer.Controllers
+namespace CaseStudyAppServer.Controllers.Admin
 {
-    [Route("api/v1/admin")]
+    [Route(RouteConstants.AdminRoute)]
     [ApiController]
     public class AdminController : ControllerBase
     {

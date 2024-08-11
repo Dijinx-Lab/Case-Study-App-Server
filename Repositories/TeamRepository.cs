@@ -21,6 +21,7 @@ namespace CaseStudyAppServer.Repositories
             _context = context;
             _teamService = teamService;
         }
+
         public async Task<Team> CreateAsync(string name)
         {
             string uniqueCode = await _teamService.GenerateUniqueTeamCode();
@@ -36,7 +37,7 @@ namespace CaseStudyAppServer.Repositories
 
         public async Task<Team?> DeleteAsync(string teamCode)
         {
-            var existingTeam = await _context.Teams.FirstOrDefaultAsync(x => x.Code == teamCode);
+            var existingTeam = await _context.Teams.FirstOrDefaultAsync(x => x.Code == teamCode && x.DeletedOn == null);
             if (existingTeam == null) return null;
 
             existingTeam.DeletedOn = DateTime.UtcNow;
@@ -62,7 +63,7 @@ namespace CaseStudyAppServer.Repositories
 
         public async Task<Team?> UpdateAsync(string code, string name)
         {
-            var existingTeam = await _context.Teams.FirstOrDefaultAsync(x => x.Code == code);
+            var existingTeam = await _context.Teams.FirstOrDefaultAsync(x => x.Code == code && x.DeletedOn == null);
             if (existingTeam == null) return null;
 
             existingTeam.Name = name;
