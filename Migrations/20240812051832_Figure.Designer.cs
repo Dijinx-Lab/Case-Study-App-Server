@@ -4,6 +4,7 @@ using CaseStudyAppServer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CaseStudyAppServer.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240812051832_Figure")]
+    partial class Figure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,10 +35,6 @@ namespace CaseStudyAppServer.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DisplayName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -254,13 +253,13 @@ namespace CaseStudyAppServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1e9167b1-ae27-4e90-9862-6977ea12b8ba",
+                            Id = "d10f615d-4bd7-4155-a61f-bbcc9e63e4c2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "6306e291-5e62-4d48-9de0-550760e19fa2",
+                            Id = "6687cbfc-2d69-4fa5-8e1a-58ca3853e9b9",
                             Name = "User",
                             NormalizedName = "USER"
                         });

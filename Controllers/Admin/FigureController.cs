@@ -64,6 +64,8 @@ namespace CaseStudyAppServer.Controllers.Admin
 
             if (existingFigure.UploadId != figureRequestDto.UploadId)
             {
+                Upload? upload = await _uploadRepo.GetByIdAsync(figureRequestDto.UploadId);
+                if (upload == null) return ResponseUtility.ReturnBadRequest(MessageConstants.ItemNotFound);
                 await _uploadRepo.DeleteAsync(existingFigure.UploadId);
             }
 

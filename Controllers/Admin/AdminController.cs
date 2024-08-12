@@ -41,9 +41,12 @@ namespace CaseStudyAppServer.Controllers.Admin
                     MessageConstants.PasswordsDontMatch
                 );
 
+                var validUserName = registerDto.Email.Replace("@", string.Empty).Replace(".", string.Empty);
+
                 var appUser = new AppUser
                 {
-                    UserName = registerDto.UserName,
+                    UserName = validUserName,
+                    DisplayName = registerDto.UserName ?? "",
                     Email = registerDto.Email,
                 };
 
@@ -61,7 +64,7 @@ namespace CaseStudyAppServer.Controllers.Admin
 
                 var adminUser = new AdminUserDto
                 {
-                    UserName = appUser.UserName,
+                    UserName = appUser.DisplayName,
                     Email = appUser.Email,
                     AuthToken = token.Value,
                     RefreshToken = token.RefreshValue,
@@ -94,7 +97,7 @@ namespace CaseStudyAppServer.Controllers.Admin
 
                 var adminUser = new AdminUserDto
                 {
-                    UserName = user.UserName,
+                    UserName = user.DisplayName,
                     Email = user.Email,
                     AuthToken = token.Value,
                     RefreshToken = token.RefreshValue,
@@ -126,7 +129,7 @@ namespace CaseStudyAppServer.Controllers.Admin
                 return ResponseUtility.ReturnOk(
                     new AdminUserGetDto
                     {
-                        UserName = user.UserName,
+                        UserName = user.DisplayName,
                         Email = user.Email,
                     }
                 );
@@ -177,7 +180,7 @@ namespace CaseStudyAppServer.Controllers.Admin
 
                 var adminUser = new AdminUserDto
                 {
-                    UserName = user.UserName,
+                    UserName = user.DisplayName,
                     Email = user.Email,
                     AuthToken = newToken.Value,
                     RefreshToken = newToken.RefreshValue,
