@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CaseStudyAppServer.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240811115924_Upload")]
-    partial class Upload
+    [Migration("20240812183853_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,10 @@ namespace CaseStudyAppServer.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -88,6 +92,238 @@ namespace CaseStudyAppServer.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.CaseStudy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BackgroundDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("BackgroundUploadId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConclusionDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ConclusionUploadId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CoverUploadId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OverviewDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OverviewUploadId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SituationDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SituationUploadId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BackgroundUploadId");
+
+                    b.HasIndex("ConclusionUploadId");
+
+                    b.HasIndex("CoverUploadId");
+
+                    b.HasIndex("OverviewUploadId");
+
+                    b.HasIndex("SituationUploadId");
+
+                    b.ToTable("CaseStudies");
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.CaseStudyFigure", b =>
+                {
+                    b.Property<int?>("FigureId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CaseStudyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FigureId", "CaseStudyId");
+
+                    b.HasIndex("CaseStudyId");
+
+                    b.ToTable("CaseStudyFigures");
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.Challenge", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CaseStudyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UploadId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CaseStudyId");
+
+                    b.HasIndex("UploadId");
+
+                    b.ToTable("Challenges");
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.Figure", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UploadId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UploadId");
+
+                    b.ToTable("Figures");
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.LeadershipStrategy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CaseStudyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CaseStudyId");
+
+                    b.ToTable("LeadershipStrategies");
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.Outcome", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CaseStudyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UploadId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CaseStudyId");
+
+                    b.HasIndex("UploadId");
+
+                    b.ToTable("Outcomes");
                 });
 
             modelBuilder.Entity("CaseStudyAppServer.Models.Team", b =>
@@ -218,13 +454,13 @@ namespace CaseStudyAppServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "90d88413-9d71-4771-893c-dd042be4ed1f",
+                            Id = "1d5b1e18-7a73-4032-b4a8-fb69a2b80c81",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "77fcde33-be79-4201-9c9f-a0bab4771578",
+                            Id = "ffbed221-e280-4259-9023-346418138b54",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -336,6 +572,114 @@ namespace CaseStudyAppServer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("CaseStudyAppServer.Models.CaseStudy", b =>
+                {
+                    b.HasOne("CaseStudyAppServer.Models.Upload", "BackgroundUpload")
+                        .WithMany()
+                        .HasForeignKey("BackgroundUploadId");
+
+                    b.HasOne("CaseStudyAppServer.Models.Upload", "ConclusionUpload")
+                        .WithMany()
+                        .HasForeignKey("ConclusionUploadId");
+
+                    b.HasOne("CaseStudyAppServer.Models.Upload", "CoverUpload")
+                        .WithMany()
+                        .HasForeignKey("CoverUploadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CaseStudyAppServer.Models.Upload", "OverviewUpload")
+                        .WithMany()
+                        .HasForeignKey("OverviewUploadId");
+
+                    b.HasOne("CaseStudyAppServer.Models.Upload", "SituationUpload")
+                        .WithMany()
+                        .HasForeignKey("SituationUploadId");
+
+                    b.Navigation("BackgroundUpload");
+
+                    b.Navigation("ConclusionUpload");
+
+                    b.Navigation("CoverUpload");
+
+                    b.Navigation("OverviewUpload");
+
+                    b.Navigation("SituationUpload");
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.CaseStudyFigure", b =>
+                {
+                    b.HasOne("CaseStudyAppServer.Models.CaseStudy", "CaseStudy")
+                        .WithMany("CaseStudyFigures")
+                        .HasForeignKey("CaseStudyId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("CaseStudyAppServer.Models.Figure", "Figure")
+                        .WithMany("CaseStudyFigures")
+                        .HasForeignKey("FigureId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CaseStudy");
+
+                    b.Navigation("Figure");
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.Challenge", b =>
+                {
+                    b.HasOne("CaseStudyAppServer.Models.CaseStudy", "CaseStudy")
+                        .WithMany("Challenges")
+                        .HasForeignKey("CaseStudyId");
+
+                    b.HasOne("CaseStudyAppServer.Models.Upload", "Upload")
+                        .WithMany()
+                        .HasForeignKey("UploadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CaseStudy");
+
+                    b.Navigation("Upload");
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.Figure", b =>
+                {
+                    b.HasOne("CaseStudyAppServer.Models.Upload", "Upload")
+                        .WithMany()
+                        .HasForeignKey("UploadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Upload");
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.LeadershipStrategy", b =>
+                {
+                    b.HasOne("CaseStudyAppServer.Models.CaseStudy", "CaseStudy")
+                        .WithMany("LeadershipStrategies")
+                        .HasForeignKey("CaseStudyId");
+
+                    b.Navigation("CaseStudy");
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.Outcome", b =>
+                {
+                    b.HasOne("CaseStudyAppServer.Models.CaseStudy", "CaseStudy")
+                        .WithMany("Outcomes")
+                        .HasForeignKey("CaseStudyId");
+
+                    b.HasOne("CaseStudyAppServer.Models.Upload", "Upload")
+                        .WithMany()
+                        .HasForeignKey("UploadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CaseStudy");
+
+                    b.Navigation("Upload");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -385,6 +729,22 @@ namespace CaseStudyAppServer.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.CaseStudy", b =>
+                {
+                    b.Navigation("CaseStudyFigures");
+
+                    b.Navigation("Challenges");
+
+                    b.Navigation("LeadershipStrategies");
+
+                    b.Navigation("Outcomes");
+                });
+
+            modelBuilder.Entity("CaseStudyAppServer.Models.Figure", b =>
+                {
+                    b.Navigation("CaseStudyFigures");
                 });
 #pragma warning restore 612, 618
         }
