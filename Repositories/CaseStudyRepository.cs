@@ -42,23 +42,15 @@ namespace CaseStudyAppServer.Repositories
             existingItem.Description = caseStudyRequestDto.Description;
             existingItem.CoverUploadId = caseStudyRequestDto.CoverUploadId;
 
-            if (caseStudyRequestDto.OverviewDescription != null)
-                existingItem.OverviewDescription = caseStudyRequestDto.OverviewDescription;
-            if (caseStudyRequestDto.BackgroundDescription != null)
-                existingItem.BackgroundDescription = caseStudyRequestDto.BackgroundDescription;
-            if (caseStudyRequestDto.SituationDescription != null)
-                existingItem.SituationDescription = caseStudyRequestDto.SituationDescription;
-            if (caseStudyRequestDto.ConclusionDescription != null)
-                existingItem.ConclusionDescription = caseStudyRequestDto.ConclusionDescription;
+            existingItem.OverviewDescription = caseStudyRequestDto.OverviewDescription;
+            existingItem.BackgroundDescription = caseStudyRequestDto.BackgroundDescription;
+            existingItem.SituationDescription = caseStudyRequestDto.SituationDescription;
+            existingItem.ConclusionDescription = caseStudyRequestDto.ConclusionDescription;
 
-            if (caseStudyRequestDto.OverviewUploadId != null)
-                existingItem.OverviewUploadId = caseStudyRequestDto.OverviewUploadId;
-            if (caseStudyRequestDto.BackgroundUploadId != null)
-                existingItem.BackgroundUploadId = caseStudyRequestDto.BackgroundUploadId;
-            if (caseStudyRequestDto.SituationUploadId != null)
-                existingItem.SituationUploadId = caseStudyRequestDto.SituationUploadId;
-            if (caseStudyRequestDto.ConclusionUploadId != null)
-                existingItem.ConclusionUploadId = caseStudyRequestDto.ConclusionUploadId;
+            existingItem.OverviewUploadId = caseStudyRequestDto.OverviewUploadId;
+            existingItem.BackgroundUploadId = caseStudyRequestDto.BackgroundUploadId;
+            existingItem.SituationUploadId = caseStudyRequestDto.SituationUploadId;
+            existingItem.ConclusionUploadId = caseStudyRequestDto.ConclusionUploadId;
 
             existingItem.UpdatedOn = DateTime.UtcNow;
 
