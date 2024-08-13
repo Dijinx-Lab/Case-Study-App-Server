@@ -10,7 +10,7 @@ namespace CaseStudyAppServer.Constants
         //GENERIC MESSAGES
         public const string ServerError = "Internal server error";
         public const string BadRequest = "Bad request submitted and one or more validations failed";
-        public const string ItemNotFound = "Item not found";
+        public const string ItemNotFound = "One or more items not found";
         public const string ErrorProcessingRequest = "There was an error processing your request, please try again later";
         public const string ItemDeleted = "Item deleted successfully";
 

@@ -101,6 +101,7 @@ builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddScoped<IUploadRepository, UploadRepository>();
 builder.Services.AddScoped<IFigureRepository, FigureRepository>();
+builder.Services.AddScoped<ICaseStudyRepository, CaseStudyRepository>();
 
 var app = builder.Build();
 
