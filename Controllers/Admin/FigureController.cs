@@ -1,5 +1,5 @@
 using CaseStudyAppServer.Constants;
-using CaseStudyAppServer.Dtos.Figure;
+using CaseStudyAppServer.Dtos.Figures;
 using CaseStudyAppServer.Helpers;
 using CaseStudyAppServer.Interfaces;
 using CaseStudyAppServer.Mappers;

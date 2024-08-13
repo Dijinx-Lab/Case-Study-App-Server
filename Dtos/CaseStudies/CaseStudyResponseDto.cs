@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CaseStudyAppServer.Dtos.Challenges;
 using CaseStudyAppServer.Models;
 
-namespace CaseStudyAppServer.Dtos.CaseStudy
+namespace CaseStudyAppServer.Dtos.CaseStudies
 {
     public class CaseStudyResponseDto
     {
@@ -19,7 +16,8 @@ namespace CaseStudyAppServer.Dtos.CaseStudy
         public string? SituationDescription { get; set; }
         public Upload? SituationUpload { get; set; }
         public string? ConclusionDescription { get; set; }
-        public Upload? ConclusionUpload { get; set; }        
+        public Upload? ConclusionUpload { get; set; }
+        public List<ChallengeResponseDto>? Challenges { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public DateTime? DeletedOn { get; set; }

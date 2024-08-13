@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CaseStudyAppServer.Dtos.Figure
+namespace CaseStudyAppServer.Dtos.Challenges
 {
-    public class FigureRequestDto
+    public class ChallengeRequestDto
     {
         [Required]
         public string Name { get; set; } = string.Empty;
@@ -14,5 +10,7 @@ namespace CaseStudyAppServer.Dtos.Figure
         public string Description { get; set; } = string.Empty;
         [Required]
         public int UploadId { get; set; }
+        [Required]
+        public int CaseStudyId { get; set; }
     }
 }

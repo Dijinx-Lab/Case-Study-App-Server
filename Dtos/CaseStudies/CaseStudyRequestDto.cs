@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CaseStudyAppServer.Dtos.CaseStudy
+namespace CaseStudyAppServer.Dtos.CaseStudies
 {
     public class CaseStudyRequestDto
     {

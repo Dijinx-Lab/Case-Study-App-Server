@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CaseStudyAppServer.Models;
 
-namespace CaseStudyAppServer.Dtos.Figure
+namespace CaseStudyAppServer.Dtos.Figures
 {
     public class FigureResponseDto
     {

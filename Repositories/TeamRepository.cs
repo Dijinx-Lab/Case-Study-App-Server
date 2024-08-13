@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CaseStudyAppServer.Data;
-using CaseStudyAppServer.Dtos.Team;
 using CaseStudyAppServer.Interfaces;
 using CaseStudyAppServer.Models;
-using CaseStudyAppServer.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace CaseStudyAppServer.Repositories

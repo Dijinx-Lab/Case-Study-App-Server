@@ -1,5 +1,5 @@
 using CaseStudyAppServer.Constants;
-using CaseStudyAppServer.Dtos.Admin;
+using CaseStudyAppServer.Dtos.Admins;
 using CaseStudyAppServer.Extenstions;
 using CaseStudyAppServer.Helpers;
 using CaseStudyAppServer.Interfaces;

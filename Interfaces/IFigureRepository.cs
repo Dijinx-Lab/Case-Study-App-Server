@@ -1,4 +1,4 @@
-using CaseStudyAppServer.Dtos.Figure;
+using CaseStudyAppServer.Dtos.Figures;
 using CaseStudyAppServer.Models;
 
 namespace CaseStudyAppServer.Interfaces

@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CaseStudyAppServer.Dtos.Admin
+namespace CaseStudyAppServer.Dtos.Admins
 {
-    public class AdminUserDto
+    public class AdminUserGetDto
     {
         public string? UserName { get; set; }
         public string? Email { get; set; }
-        public string AuthToken { get; set; } = string.Empty;
-        public string RefreshToken { get; set; } = string.Empty;
     }
 }

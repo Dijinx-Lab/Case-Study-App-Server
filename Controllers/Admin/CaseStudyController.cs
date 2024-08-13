@@ -1,5 +1,5 @@
 using CaseStudyAppServer.Constants;
-using CaseStudyAppServer.Dtos.CaseStudy;
+using CaseStudyAppServer.Dtos.CaseStudies;
 using CaseStudyAppServer.Helpers;
 using CaseStudyAppServer.Interfaces;
 using CaseStudyAppServer.Mappers;
@@ -83,10 +83,10 @@ namespace CaseStudyAppServer.Controllers.Admin
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var existingFigure = await _studyRepo.GetByIdAsync(id);
-            if (existingFigure == null) return ResponseUtility.ReturnOk(null, MessageConstants.ItemNotFound);
+            var existingItem = await _studyRepo.GetByIdAsync(id);
+            if (existingItem == null) return ResponseUtility.ReturnOk(null, MessageConstants.ItemNotFound);
 
-            return ResponseUtility.ReturnOk(new { caseStudy = existingFigure.ToResponseDto() });
+            return ResponseUtility.ReturnOk(new { caseStudy = existingItem.ToResponseDto() });
 
         }
 
@@ -94,9 +94,9 @@ namespace CaseStudyAppServer.Controllers.Admin
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
-            var figureList = await _studyRepo.GetAllAsync();
-            var filteredFigures = figureList.Select(s => s.ToResponseDto());
-            return ResponseUtility.ReturnOk(new { caseStudies = filteredFigures });
+            var items = await _studyRepo.GetAllAsync();
+            var filteredItems = items.Select(s => s.ToResponseDto());
+            return ResponseUtility.ReturnOk(new { caseStudies = filteredItems });
         }
     }
 }

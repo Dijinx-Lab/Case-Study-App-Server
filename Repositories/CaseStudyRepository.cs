@@ -1,5 +1,5 @@
 using CaseStudyAppServer.Data;
-using CaseStudyAppServer.Dtos.CaseStudy;
+using CaseStudyAppServer.Dtos.CaseStudies;
 using CaseStudyAppServer.Interfaces;
 using CaseStudyAppServer.Models;
 using Microsoft.EntityFrameworkCore;
@@ -67,6 +67,7 @@ namespace CaseStudyAppServer.Repositories
            .Include(x => x.BackgroundUpload)
            .Include(x => x.SituationUpload)
            .Include(x => x.ConclusionUpload)
+           .Include(x => x.Challenges).ThenInclude(c => c.Upload)
            //TODO: INCLUDE AND THEN INCLUDE REST OF THE OBJS
            .ToListAsync();
             return uploads;
@@ -74,17 +75,21 @@ namespace CaseStudyAppServer.Repositories
 
         public async Task<CaseStudy?> GetByIdAsync(int id)
         {
-            var upload = await _context.CaseStudies
+            var item = await _context.CaseStudies
             .Include(x => x.CoverUpload)
             .Include(x => x.OverviewUpload)
             .Include(x => x.BackgroundUpload)
             .Include(x => x.SituationUpload)
             .Include(x => x.ConclusionUpload)
-            //TODO: INCLUDE AND THEN INCLUDE REST OF THE OBJS
+            .Include(x => x.Challenges).ThenInclude(c => c.Upload)
             .FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
-            return upload;
+            return item;
         }
 
-
+        public async Task<bool> CheckExistsAsync(int id)
+        {
+            var item = await _context.CaseStudies.FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
+            return item != null;
+        }
     }
 }

@@ -1,5 +1,5 @@
 using CaseStudyAppServer.Data;
-using CaseStudyAppServer.Dtos.Figure;
+using CaseStudyAppServer.Dtos.Figures;
 using CaseStudyAppServer.Interfaces;
 using CaseStudyAppServer.Models;
 using Microsoft.EntityFrameworkCore;

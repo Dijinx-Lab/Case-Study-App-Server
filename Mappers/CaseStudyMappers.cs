@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CaseStudyAppServer.Dtos.CaseStudy;
+using CaseStudyAppServer.Dtos.CaseStudies;
 using CaseStudyAppServer.Models;
 
 namespace CaseStudyAppServer.Mappers
@@ -42,7 +42,7 @@ namespace CaseStudyAppServer.Mappers
                 SituationUpload = responseObj.SituationUpload,
                 ConclusionDescription = responseObj.ConclusionDescription,
                 ConclusionUpload = responseObj.ConclusionUpload,
-
+                Challenges = responseObj.Challenges?.Select(x => x.ToResponseDto()).ToList(),
                 CreatedOn = responseObj.CreatedOn,
                 UpdatedOn = responseObj.UpdatedOn,
                 DeletedOn = responseObj.DeletedOn,
