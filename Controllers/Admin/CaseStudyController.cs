@@ -41,7 +41,7 @@ namespace CaseStudyAppServer.Controllers.Admin
             CaseStudy? createdItem = await _studyRepo.CreateAsync(requestDto.ToObjectFromRequestDto());
             if (createdItem == null) return ResponseUtility.ReturnOk(null, MessageConstants.ErrorProcessingRequest);
 
-            return ResponseUtility.ReturnOk(new { caseStudy = createdItem.ToResponseDto() });
+            return ResponseUtility.ReturnOk(new { casestudy = createdItem.ToResponseDto() });
 
         }
 
@@ -76,7 +76,7 @@ namespace CaseStudyAppServer.Controllers.Admin
             CaseStudy? updatedItem = await _studyRepo.UpdateAsync(id, requestDto);
             if (updatedItem == null) return ResponseUtility.ReturnOk(null, MessageConstants.ErrorProcessingRequest);
 
-            return ResponseUtility.ReturnOk(new { caseStudy = updatedItem.ToResponseDto() });
+            return ResponseUtility.ReturnOk(new { casestudy = updatedItem.ToResponseDto() });
         }
 
         [HttpGet("{id:int}")]
@@ -86,7 +86,7 @@ namespace CaseStudyAppServer.Controllers.Admin
             var existingItem = await _studyRepo.GetByIdAsync(id);
             if (existingItem == null) return ResponseUtility.ReturnOk(null, MessageConstants.ItemNotFound);
 
-            return ResponseUtility.ReturnOk(new { caseStudy = existingItem.ToResponseDto() });
+            return ResponseUtility.ReturnOk(new { casestudy = existingItem.ToResponseDto() });
 
         }
 
@@ -96,7 +96,7 @@ namespace CaseStudyAppServer.Controllers.Admin
         {
             var items = await _studyRepo.GetAllAsync();
             var filteredItems = items.Select(s => s.ToResponseDto());
-            return ResponseUtility.ReturnOk(new { caseStudies = filteredItems });
+            return ResponseUtility.ReturnOk(new { casestudies = filteredItems });
         }
     }
 }

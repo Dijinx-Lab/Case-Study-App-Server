@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace CaseStudyAppServer.Helpers
 {
-
-
     public class S3Utility
     {
         // private  AmazonS3Client s3Client;
@@ -95,5 +93,4 @@ namespace CaseStudyAppServer.Helpers
         //     }
         // }
     }
-
 }

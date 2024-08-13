@@ -61,13 +61,15 @@ namespace CaseStudyAppServer.Repositories
         public async Task<List<CaseStudy>> GetAllAsync()
         {
             var uploads = await _context.CaseStudies
-           .Where(x => x.DeletedOn == null)
-           .Include(x => x.CoverUpload)
-           .Include(x => x.OverviewUpload)
-           .Include(x => x.BackgroundUpload)
-           .Include(x => x.SituationUpload)
-           .Include(x => x.ConclusionUpload)
-           .Include(x => x.Challenges).ThenInclude(c => c.Upload)
+            .Where(x => x.DeletedOn == null)
+            .Include(x => x.CoverUpload)
+            .Include(x => x.OverviewUpload)
+            .Include(x => x.BackgroundUpload)
+            .Include(x => x.SituationUpload)
+            .Include(x => x.ConclusionUpload)
+            .Include(x => x.Challenges).ThenInclude(c => c.Upload)
+            .Include(x => x.Outcomes).ThenInclude(c => c.Upload)
+            .Include(x => x.LeadershipStrategies)
            //TODO: INCLUDE AND THEN INCLUDE REST OF THE OBJS
            .ToListAsync();
             return uploads;
@@ -82,6 +84,9 @@ namespace CaseStudyAppServer.Repositories
             .Include(x => x.SituationUpload)
             .Include(x => x.ConclusionUpload)
             .Include(x => x.Challenges).ThenInclude(c => c.Upload)
+            .Include(x => x.Outcomes).ThenInclude(c => c.Upload)
+            .Include(x => x.LeadershipStrategies)
+            //TODO: INCLUDE AND THEN INCLUDE REST OF THE OBJS
             .FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
             return item;
         }

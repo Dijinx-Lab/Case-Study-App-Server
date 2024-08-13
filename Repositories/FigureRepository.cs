@@ -1,6 +1,7 @@
 using CaseStudyAppServer.Data;
 using CaseStudyAppServer.Dtos.Figures;
 using CaseStudyAppServer.Interfaces;
+using CaseStudyAppServer.Mappers;
 using CaseStudyAppServer.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -53,7 +54,7 @@ namespace CaseStudyAppServer.Repositories
             .Where(x => x.DeletedOn == null)
             .Include(x => x.Upload)
             .ToListAsync();
-            return uploads;
+            return uploads.Select(x => x.ToDeleteSafe()).ToList();
         }
 
         public async Task<Figure?> GetByIdAsync(int id)
@@ -61,7 +62,7 @@ namespace CaseStudyAppServer.Repositories
             var existingReview = await _context.Figures
             .Include(x => x.Upload)
             .FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
-            return existingReview;
+            return existingReview?.ToDeleteSafe();
         }
     }
 }

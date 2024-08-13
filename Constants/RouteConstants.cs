@@ -17,5 +17,7 @@ namespace CaseStudyAppServer.Constants
         public const string FigureRoute = $"{BaseV1Route}{AdminSubRoute}/figure";
         public const string ChallengeRoute = $"{BaseV1Route}{AdminSubRoute}/challenge";
         public const string CaseStudyRoute = $"{BaseV1Route}{AdminSubRoute}/case-study";
+        public const string OutcomeRoute = $"{BaseV1Route}{AdminSubRoute}/outcome";
+        public const string LeadershipStrategyRoute = $"{BaseV1Route}{AdminSubRoute}/leadership-strategy";
     }
 }

@@ -1,5 +1,5 @@
 using CaseStudyAppServer.Data;
-using CaseStudyAppServer.Dtos.Challenges;
+using CaseStudyAppServer.Dtos.Outcomes;
 using CaseStudyAppServer.Interfaces;
 using CaseStudyAppServer.Mappers;
 using CaseStudyAppServer.Models;
@@ -7,25 +7,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CaseStudyAppServer.Repositories
 {
-    public class ChallengeRepository : IChallengeRepository
+    public class OutcomeRepository : IOutcomeRepository
     {
         private readonly ApplicationDBContext _context;
 
-        public ChallengeRepository(ApplicationDBContext context)
+        public OutcomeRepository(ApplicationDBContext context)
         {
             _context = context;
         }
 
-        public async Task<Challenge> CreateAsync(Challenge challenge)
+        public async Task<Outcome> CreateAsync(Outcome outcome)
         {
-            await _context.Challenges.AddAsync(challenge);
+            await _context.Outcomes.AddAsync(outcome);
             await _context.SaveChangesAsync();
-            return challenge;
+            return outcome;
         }
 
-        public async Task<Challenge?> DeleteAsync(int id)
+        public async Task<Outcome?> DeleteAsync(int id)
         {
-            var existingItem = await _context.Challenges.FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
+            var existingItem = await _context.Outcomes.FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
             if (existingItem == null) return null;
 
             existingItem.DeletedOn = DateTime.UtcNow;
@@ -34,33 +34,33 @@ namespace CaseStudyAppServer.Repositories
             return existingItem;
         }
 
-        public async Task<Challenge?> UpdateAsync(int id, ChallengeRequestDto challengeRequestDto)
+        public async Task<Outcome?> UpdateAsync(int id, OutcomeRequestDto requestDto)
         {
-            var existingItem = await _context.Challenges.FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
+            var existingItem = await _context.Outcomes.FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
             if (existingItem == null) return null;
 
-            existingItem.Name = challengeRequestDto.Name;
-            existingItem.Description = challengeRequestDto.Description;
-            existingItem.UploadId = challengeRequestDto.UploadId;
+            existingItem.Name = requestDto.Name;
+            existingItem.Description = requestDto.Description;
+            existingItem.UploadId = requestDto.UploadId;
             existingItem.UpdatedOn = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
             return existingItem;
         }
 
-        public async Task<List<Challenge>> GetAllAsync(int? caseStudyId)
+        public async Task<List<Outcome>> GetAllAsync(int? caseStudyId)
         {
-            List<Challenge> items;
+            List<Outcome> items;
             if (caseStudyId != null)
             {
-                items = await _context.Challenges
+                items = await _context.Outcomes
                     .Where(x => x.DeletedOn == null && x.CaseStudyId == caseStudyId)
                     .Include(x => x.Upload)
                     .ToListAsync();
             }
             else
             {
-                items = await _context.Challenges
+                items = await _context.Outcomes
                     .Where(x => x.DeletedOn == null)
                     .Include(x => x.Upload)
                     .ToListAsync();
@@ -69,9 +69,9 @@ namespace CaseStudyAppServer.Repositories
             return items.Select(x => x.ToDeleteSafe()).ToList();
         }
 
-        public async Task<Challenge?> GetByIdAsync(int id)
+        public async Task<Outcome?> GetByIdAsync(int id)
         {
-            var item = await _context.Challenges
+            var item = await _context.Outcomes
                 .Include(x => x.Upload)
                 .FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
 

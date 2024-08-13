@@ -22,10 +22,10 @@ namespace CaseStudyAppServer.Models
         public string? ConclusionDescription { get; set; }
         public int? ConclusionUploadId { get; set; }
         public Upload? ConclusionUpload { get; set; }
-        public List<CaseStudyFigure>? CaseStudyFigures { get; set; }
+        public List<CaseStudyFigure> CaseStudyFigures { get; set; } = [];
         public List<Challenge> Challenges { get; set; } = [];
-        public List<LeadershipStrategy>? LeadershipStrategies { get; set; }
-        public List<Outcome>? Outcomes { get; set; }
+        public List<LeadershipStrategy> LeadershipStrategies { get; set; } = [];
+        public List<Outcome> Outcomes { get; set; } = [];
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedOn { get; set; }

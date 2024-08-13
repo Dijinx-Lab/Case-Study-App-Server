@@ -103,6 +103,8 @@ builder.Services.AddScoped<IUploadRepository, UploadRepository>();
 builder.Services.AddScoped<IFigureRepository, FigureRepository>();
 builder.Services.AddScoped<ICaseStudyRepository, CaseStudyRepository>();
 builder.Services.AddScoped<IChallengeRepository, ChallengeRepository>();
+builder.Services.AddScoped<IOutcomeRepository, OutcomeRepository>();
+builder.Services.AddScoped<ILeadershipStrategyRepository, LeadershipStrategyRepository>();
 
 var app = builder.Build();
 

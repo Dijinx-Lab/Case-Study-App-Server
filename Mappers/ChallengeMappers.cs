@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CaseStudyAppServer.Dtos.Challenges;
 using CaseStudyAppServer.Models;
 
@@ -31,6 +27,23 @@ namespace CaseStudyAppServer.Mappers
                 CreatedOn = responseObj.CreatedOn,
                 UpdatedOn = responseObj.UpdatedOn,
                 DeletedOn = responseObj.DeletedOn,
+            };
+        }
+
+        public static Challenge ToDeleteSafe(this Challenge challenge)
+        {
+            return new Challenge
+            {
+                Id = challenge.Id,
+                Name = challenge.Name,
+                Description = challenge.Description,
+                UploadId = challenge.UploadId,
+                Upload = challenge.Upload == null ? null : challenge.Upload.DeletedOn != null ? null : challenge.Upload,
+                CaseStudyId = challenge.CaseStudyId,
+                CaseStudy = challenge.CaseStudy,
+                CreatedOn = challenge.CreatedOn,
+                UpdatedOn = challenge.UpdatedOn,
+                DeletedOn = challenge.DeletedOn,
             };
         }
     }

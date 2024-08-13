@@ -28,5 +28,21 @@ namespace CaseStudyAppServer.Mappers
                 DeletedOn = figure.DeletedOn,
             };
         }
+
+        public static Figure ToDeleteSafe(this Figure figure)
+        {
+            return new Figure
+            {
+                Id = figure.Id,
+                Name = figure.Name,
+                Description = figure.Description,
+                UploadId = figure.UploadId,
+                Upload = figure.Upload == null ? null : figure.Upload.DeletedOn != null ? null : figure.Upload,
+                CaseStudyFigures = figure.CaseStudyFigures,
+                CreatedOn = figure.CreatedOn,
+                UpdatedOn = figure.UpdatedOn,
+                DeletedOn = figure.DeletedOn,
+            };
+        }
     }
 }
