@@ -61,34 +61,117 @@ namespace CaseStudyAppServer.Repositories
         public async Task<List<CaseStudy>> GetAllAsync()
         {
             var uploads = await _context.CaseStudies
-            .Where(x => x.DeletedOn == null)
-            .Include(x => x.CoverUpload)
-            .Include(x => x.OverviewUpload)
-            .Include(x => x.BackgroundUpload)
-            .Include(x => x.SituationUpload)
-            .Include(x => x.ConclusionUpload)
-            .Include(x => x.Challenges).ThenInclude(c => c.Upload)
-            .Include(x => x.Outcomes).ThenInclude(c => c.Upload)
-            .Include(x => x.LeadershipStrategies)
-           //TODO: INCLUDE AND THEN INCLUDE REST OF THE OBJS
-           .ToListAsync();
-            return uploads;
+                .Where(x => x.DeletedOn == null)
+                .Include(x => x.CoverUpload)
+                .Include(x => x.OverviewUpload)
+                .Include(x => x.BackgroundUpload)
+                .Include(x => x.SituationUpload)
+                .Include(x => x.ConclusionUpload)
+                .Include(x => x.LeadershipStrategies)
+                .Select(x => new
+                {
+                    Entity = x,
+                    CoverUpload = x.CoverUpload != null && x.CoverUpload.DeletedOn == null ? x.CoverUpload : null,
+                    OverviewUpload = x.OverviewUpload != null && x.OverviewUpload.DeletedOn == null ? x.OverviewUpload : null,
+                    BackgroundUpload = x.BackgroundUpload != null && x.BackgroundUpload.DeletedOn == null ? x.BackgroundUpload : null,
+                    SituationUpload = x.SituationUpload != null && x.SituationUpload.DeletedOn == null ? x.SituationUpload : null,
+                    ConclusionUpload = x.ConclusionUpload != null && x.ConclusionUpload.DeletedOn == null ? x.ConclusionUpload : null,
+                    Challenges = x.Challenges
+                        .Where(c => c.DeletedOn == null)
+                        .Select(c => new
+                        {
+                            Challenge = c,
+                            Upload = c.Upload
+                        })
+                        .ToList(),
+                    Outcomes = x.Outcomes
+                        .Where(o => o.DeletedOn == null)
+                        .Select(o => new
+                        {
+                            Outcome = o,
+                            Upload = o.Upload
+                        })
+                        .ToList()
+                })
+                .ToListAsync();
+
+            uploads.ForEach(x =>
+            {
+                x.Entity.Challenges = x.Challenges.Select(c =>
+                {
+                    c.Challenge.Upload = c.Upload;
+                    return c.Challenge;
+                }).ToList();
+                x.Entity.Outcomes = x.Outcomes.Select(o =>
+                {
+                    o.Outcome.Upload = o.Upload;
+                    return o.Outcome;
+                }).ToList();
+            });
+
+            return uploads.Select(x => x.Entity).ToList();
         }
 
         public async Task<CaseStudy?> GetByIdAsync(int id)
         {
             var item = await _context.CaseStudies
-            .Include(x => x.CoverUpload)
-            .Include(x => x.OverviewUpload)
-            .Include(x => x.BackgroundUpload)
-            .Include(x => x.SituationUpload)
-            .Include(x => x.ConclusionUpload)
-            .Include(x => x.Challenges).ThenInclude(c => c.Upload)
-            .Include(x => x.Outcomes).ThenInclude(c => c.Upload)
-            .Include(x => x.LeadershipStrategies)
-            //TODO: INCLUDE AND THEN INCLUDE REST OF THE OBJS
-            .FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
-            return item;
+                .Where(x => x.Id == id && x.DeletedOn == null)
+                .Include(x => x.CoverUpload)
+                .Include(x => x.OverviewUpload)
+                .Include(x => x.BackgroundUpload)
+                .Include(x => x.SituationUpload)
+                .Include(x => x.ConclusionUpload)
+                .Include(x => x.LeadershipStrategies)
+                .Select(x => new
+                {
+                    Entity = x,
+                    CoverUpload = x.CoverUpload != null && x.CoverUpload.DeletedOn == null ? x.CoverUpload : null,
+                    OverviewUpload = x.OverviewUpload != null && x.OverviewUpload.DeletedOn == null ? x.OverviewUpload : null,
+                    BackgroundUpload = x.BackgroundUpload != null && x.BackgroundUpload.DeletedOn == null ? x.BackgroundUpload : null,
+                    SituationUpload = x.SituationUpload != null && x.SituationUpload.DeletedOn == null ? x.SituationUpload : null,
+                    ConclusionUpload = x.ConclusionUpload != null && x.ConclusionUpload.DeletedOn == null ? x.ConclusionUpload : null,
+                    Challenges = x.Challenges
+                        .Where(c => c.DeletedOn == null)
+                        .Select(c => new
+                        {
+                            Challenge = c,
+                            Upload = c.Upload != null && c.Upload.DeletedOn == null ? c.Upload : null
+                        })
+                        .ToList(),
+                    Outcomes = x.Outcomes
+                        .Where(o => o.DeletedOn == null)
+                        .Select(o => new
+                        {
+                            Outcome = o,
+                            Upload = o.Upload != null && o.Upload.DeletedOn == null ? o.Upload : null
+                        })
+                        .ToList()
+                })
+                .FirstOrDefaultAsync();
+
+            if (item == null)
+            {
+                return null;
+            }
+
+            // Reassign filtered uploads to the entity
+            item.Entity.CoverUpload = item.CoverUpload;
+            item.Entity.OverviewUpload = item.OverviewUpload;
+            item.Entity.BackgroundUpload = item.BackgroundUpload;
+            item.Entity.SituationUpload = item.SituationUpload;
+            item.Entity.ConclusionUpload = item.ConclusionUpload;
+            item.Entity.Challenges = item.Challenges.Select(c =>
+            {
+                c.Challenge.Upload = c.Upload;
+                return c.Challenge;
+            }).ToList();
+            item.Entity.Outcomes = item.Outcomes.Select(o =>
+            {
+                o.Outcome.Upload = o.Upload;
+                return o.Outcome;
+            }).ToList();
+
+            return item.Entity;
         }
 
         public async Task<bool> CheckExistsAsync(int id)

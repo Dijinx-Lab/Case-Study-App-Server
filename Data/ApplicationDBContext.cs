@@ -21,7 +21,6 @@ namespace CaseStudyAppServer.Data
         public DbSet<LeadershipStrategy> LeadershipStrategies { get; set; }
         public DbSet<Outcome> Outcomes { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

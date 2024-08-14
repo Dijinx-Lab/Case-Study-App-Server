@@ -7,16 +7,16 @@ namespace CaseStudyAppServer.Models
     public class CaseStudyFigure
     {
 
-        public int? FigureId { get; set; }
+        public int FigureId { get; set; }
 
         [ForeignKey("FigureId")]
         [DeleteBehavior(DeleteBehavior.NoAction)]
-        public Figure? Figure { get; set; }
-        public int? CaseStudyId { get; set; }
+        public Figure Figure { get; set; }
+        public int CaseStudyId { get; set; }
 
         [ForeignKey("CaseStudyId")]
         [DeleteBehavior(DeleteBehavior.NoAction)]
-        public CaseStudy? CaseStudy { get; set; }
+        public CaseStudy CaseStudy { get; set; }
 
     }
 }

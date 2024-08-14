@@ -105,6 +105,7 @@ builder.Services.AddScoped<ICaseStudyRepository, CaseStudyRepository>();
 builder.Services.AddScoped<IChallengeRepository, ChallengeRepository>();
 builder.Services.AddScoped<IOutcomeRepository, OutcomeRepository>();
 builder.Services.AddScoped<ILeadershipStrategyRepository, LeadershipStrategyRepository>();
+builder.Services.AddScoped<ICaseStudyFigureRepository, CaseStudyFigureRepository>();
 
 var app = builder.Build();
 

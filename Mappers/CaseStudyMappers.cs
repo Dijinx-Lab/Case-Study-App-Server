@@ -29,18 +29,31 @@ namespace CaseStudyAppServer.Mappers
                 Id = responseObj.Id,
                 Name = responseObj.Name,
                 Description = responseObj.Description,
-                CoverUpload = responseObj.CoverUpload,
                 OverviewDescription = responseObj.OverviewDescription,
-                OverviewUpload = responseObj.OverviewUpload,
                 BackgroundDescription = responseObj.BackgroundDescription,
-                BackgroundUpload = responseObj.BackgroundUpload,
                 SituationDescription = responseObj.SituationDescription,
-                SituationUpload = responseObj.SituationUpload,
                 ConclusionDescription = responseObj.ConclusionDescription,
+                CoverUpload = responseObj.CoverUpload,
+                OverviewUpload = responseObj.OverviewUpload,
+                BackgroundUpload = responseObj.BackgroundUpload,
+                SituationUpload = responseObj.SituationUpload,
                 ConclusionUpload = responseObj.ConclusionUpload,
                 Challenges = responseObj.Challenges?.Select(x => x.ToDeleteSafe().ToResponseDto()).ToList(),
                 Outcomes = responseObj.Outcomes?.Select(x => x.ToDeleteSafe().ToResponseDto()).ToList(),
                 LeadershipStrategies = responseObj.LeadershipStrategies?.Select(x => x.ToResponseDto()).ToList(),
+                CreatedOn = responseObj.CreatedOn,
+                UpdatedOn = responseObj.UpdatedOn,
+                DeletedOn = responseObj.DeletedOn,
+            };
+        }
+
+        public static MinimalCaseStudyDto ToMinimalDto(this CaseStudy responseObj)
+        {
+            return new MinimalCaseStudyDto
+            {
+                Id = responseObj.Id,
+                Name = responseObj.Name,
+                Description = responseObj.Description,
                 CreatedOn = responseObj.CreatedOn,
                 UpdatedOn = responseObj.UpdatedOn,
                 DeletedOn = responseObj.DeletedOn,
