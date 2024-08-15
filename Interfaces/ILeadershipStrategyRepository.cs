@@ -14,5 +14,6 @@ namespace CaseStudyAppServer.Interfaces
         Task<LeadershipStrategy> CreateAsync(LeadershipStrategy strategy);
         Task<LeadershipStrategy?> UpdateAsync(int id, LeadershipStrategyRequestDto requestDto);
         Task<LeadershipStrategy?> DeleteAsync(int id);
+        Task DeleteByCaseStudyIdAsync(int id);
     }
 }

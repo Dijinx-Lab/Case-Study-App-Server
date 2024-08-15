@@ -28,7 +28,6 @@ namespace CaseStudyAppServer.Repositories
             if (existingItem == null) return null;
 
             existingItem.DeletedOn = DateTime.UtcNow;
-            //TODO: DELETE ALL THE RELATED OBJS
             await _context.SaveChangesAsync();
             return existingItem;
         }

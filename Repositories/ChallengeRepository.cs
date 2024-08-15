@@ -77,5 +77,19 @@ namespace CaseStudyAppServer.Repositories
 
             return item?.ToDeleteSafe();
         }
+
+        public async Task DeleteByCaseStudyIdAsync(int id)
+        {
+            var challenges = await _context.Challenges
+            .Where(x => x.CaseStudyId == id && x.DeletedOn == null)
+            .ToListAsync();
+
+            foreach (var challenge in challenges)
+            {
+                challenge.DeletedOn = DateTime.UtcNow;
+            }
+            
+            await _context.SaveChangesAsync();
+        }
     }
 }

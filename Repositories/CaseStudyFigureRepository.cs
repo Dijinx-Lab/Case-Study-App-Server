@@ -40,17 +40,18 @@ namespace CaseStudyAppServer.Repositories
         public async Task<List<Figure>> GetByCaseStudyIdAsync(int caseStudyId)
         {
             var items = await _context.CaseStudyFigures
-            .Where(x => x.CaseStudyId == caseStudyId)
-            .Select(f => f.Figure)
-            .ToListAsync();
+                .Where(x => x.CaseStudyId == caseStudyId && x.Figure.DeletedOn == null)
+                .Select(x => x.Figure)
+                .ToListAsync();
 
             return items;
         }
 
+
         public async Task<List<CaseStudy>> GetByFigureIdAsync(int figureId)
         {
             var items = await _context.CaseStudyFigures
-            .Where(x => x.FigureId == figureId)
+            .Where(x => x.FigureId == figureId && x.CaseStudy.DeletedOn == null)
             .Select(c => c.CaseStudy)
             .ToListAsync();
 

@@ -1,4 +1,5 @@
 using CaseStudyAppServer.Dtos.Challenges;
+using CaseStudyAppServer.Dtos.Figures;
 using CaseStudyAppServer.Dtos.LeadershipStrategy;
 using CaseStudyAppServer.Dtos.Outcomes;
 using CaseStudyAppServer.Models;
@@ -22,6 +23,7 @@ namespace CaseStudyAppServer.Dtos.CaseStudies
         public List<ChallengeResponseDto>? Challenges { get; set; } = [];
         public List<OutcomeResponseDto>? Outcomes { get; set; } = [];
         public List<LeadershipStrategyResponseDto>? LeadershipStrategies { get; set; } = [];
+        public List<FigureResponseDto>? Figures { get; set; } = [];
         public DateTime CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public DateTime? DeletedOn { get; set; }

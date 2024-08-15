@@ -10,5 +10,6 @@ namespace CaseStudyAppServer.Interfaces
         Task<Challenge> CreateAsync(Challenge challenge);
         Task<Challenge?> UpdateAsync(int id, ChallengeRequestDto challengeRequestDto);
         Task<Challenge?> DeleteAsync(int id);
+        Task DeleteByCaseStudyIdAsync(int id);
     }
 }

@@ -14,5 +14,6 @@ namespace CaseStudyAppServer.Interfaces
         Task<Outcome> CreateAsync(Outcome outcome);
         Task<Outcome?> UpdateAsync(int id, OutcomeRequestDto requestDto);
         Task<Outcome?> DeleteAsync(int id);
+        Task DeleteByCaseStudyIdAsync(int id);
     }
 }
