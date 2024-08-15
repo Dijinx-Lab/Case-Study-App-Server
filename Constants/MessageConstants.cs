@@ -31,5 +31,9 @@ namespace CaseStudyAppServer.Constants
         //UPLOAD
         public const string FileIsRequired = "File is a required field";
         public const string FileSizeLimit = "Max file size limit is 10MB";
+
+        //TIMING
+        public const string InvalidTimeFormat = "Incorrect date time format";
+        public const string ShouldBeAfterStartTime = "End date time should be after start date time";
     }
 }

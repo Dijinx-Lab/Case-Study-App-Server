@@ -12,6 +12,7 @@ namespace CaseStudyAppServer.Data
 
         }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Timing> Timings { get; set; }
         public DbSet<Token> Tokens { get; set; }
         public DbSet<Upload> Uploads { get; set; }
         public DbSet<CaseStudy> CaseStudies { get; set; }
@@ -20,6 +21,7 @@ namespace CaseStudyAppServer.Data
         public DbSet<Challenge> Challenges { get; set; }
         public DbSet<LeadershipStrategy> LeadershipStrategies { get; set; }
         public DbSet<Outcome> Outcomes { get; set; }
+        public DbSet<Question> Questions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

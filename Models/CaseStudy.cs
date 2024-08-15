@@ -27,6 +27,8 @@ namespace CaseStudyAppServer.Models
         public List<LeadershipStrategy> LeadershipStrategies { get; set; } = [];
         public List<Outcome> Outcomes { get; set; } = [];
 
+        public List<Question> Questions { get; set; } = [];
+
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedOn { get; set; }
         public DateTime? DeletedOn { get; set; }

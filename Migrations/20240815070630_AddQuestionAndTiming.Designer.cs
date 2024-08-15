@@ -4,6 +4,7 @@ using CaseStudyAppServer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CaseStudyAppServer.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240815070630_AddQuestionAndTiming")]
+    partial class AddQuestionAndTiming
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -323,41 +326,6 @@ namespace CaseStudyAppServer.Migrations
                     b.ToTable("Outcomes");
                 });
 
-            modelBuilder.Entity("CaseStudyAppServer.Models.Question", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CaseStudyId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CaseStudyId");
-
-                    b.ToTable("Questions");
-                });
-
             modelBuilder.Entity("CaseStudyAppServer.Models.Team", b =>
                 {
                     b.Property<int>("Id")
@@ -386,42 +354,6 @@ namespace CaseStudyAppServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("CaseStudyAppServer.Models.Timing", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CaseStudyId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("EndedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("StartedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("Timings");
                 });
 
             modelBuilder.Entity("CaseStudyAppServer.Models.Token", b =>
@@ -522,13 +454,13 @@ namespace CaseStudyAppServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "150640a8-1902-4685-8d2d-3e58168c17f1",
+                            Id = "4c646bd4-2619-4586-bc58-4d9a54354b13",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "2bf69bc2-3579-4e82-849f-7660335087bd",
+                            Id = "64dee89b-bfa1-4968-ac4d-cc5c3110593c",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -748,24 +680,6 @@ namespace CaseStudyAppServer.Migrations
                     b.Navigation("Upload");
                 });
 
-            modelBuilder.Entity("CaseStudyAppServer.Models.Question", b =>
-                {
-                    b.HasOne("CaseStudyAppServer.Models.CaseStudy", null)
-                        .WithMany("Questions")
-                        .HasForeignKey("CaseStudyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CaseStudyAppServer.Models.Timing", b =>
-                {
-                    b.HasOne("CaseStudyAppServer.Models.Team", null)
-                        .WithMany("Timings")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -826,18 +740,11 @@ namespace CaseStudyAppServer.Migrations
                     b.Navigation("LeadershipStrategies");
 
                     b.Navigation("Outcomes");
-
-                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("CaseStudyAppServer.Models.Figure", b =>
                 {
                     b.Navigation("CaseStudyFigures");
-                });
-
-            modelBuilder.Entity("CaseStudyAppServer.Models.Team", b =>
-                {
-                    b.Navigation("Timings");
                 });
 #pragma warning restore 612, 618
         }
