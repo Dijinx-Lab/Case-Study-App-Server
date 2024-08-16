@@ -18,5 +18,31 @@ namespace CaseStudyAppServer.Mappers
                 CaseStudyId = requestDto.CaseStudyId,
             };
         }
+
+        public static QuestionResponseDto ToResponse(this Question obj)
+        {
+            return new QuestionResponseDto
+            {
+                Id = obj.Id,
+                Title = obj.Title,
+                Description = obj.Description,
+                CreatedOn = obj.CreatedOn,
+                UpdatedOn = obj.UpdatedOn,
+                DeletedOn = obj.DeletedOn,
+            };
+        }
+
+        public static QuestionAnswerResponseDto ToResponseWithAnswer(this Question obj)
+        {
+            return new QuestionAnswerResponseDto
+            {
+                Id = obj.Id,
+                Title = obj.Title,
+                Description = obj.Description,
+                CreatedOn = obj.CreatedOn,
+                UpdatedOn = obj.UpdatedOn,
+                DeletedOn = obj.DeletedOn,
+            };
+        }
     }
 }

@@ -22,6 +22,7 @@ namespace CaseStudyAppServer.Data
         public DbSet<LeadershipStrategy> LeadershipStrategies { get; set; }
         public DbSet<Outcome> Outcomes { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,10 +44,12 @@ namespace CaseStudyAppServer.Data
             List<IdentityRole> roles =
             [
                 new(){
+                    Id = "1",
                     Name = "Admin",
                     NormalizedName = "ADMIN",
                 },
                 new(){
+                    Id = "2",
                     Name = "User",
                     NormalizedName = "USER",
                 },
