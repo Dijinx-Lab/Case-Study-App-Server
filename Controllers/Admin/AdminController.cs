@@ -41,7 +41,7 @@ namespace CaseStudyAppServer.Controllers.Admin
                     MessageConstants.PasswordsDontMatch
                 );
 
-                var validUserName = registerDto.Email.Replace("@", string.Empty).Replace(".", string.Empty);
+                var validUserName = registerDto.Email?.Replace("@", string.Empty).Replace(".", string.Empty);
 
                 var appUser = new AppUser
                 {

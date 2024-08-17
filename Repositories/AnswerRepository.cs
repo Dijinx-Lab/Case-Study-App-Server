@@ -13,9 +13,9 @@ namespace CaseStudyAppServer.Repositories
             _context = context;
         }
 
-        public async Task<Answer> CreateAsync(Answer answer)
+        public async Task<List<Answer>> CreateBatchAsync(List<Answer> answer)
         {
-            await _context.Answers.AddAsync(answer);
+            await _context.Answers.AddRangeAsync(answer);
             await _context.SaveChangesAsync();
             return answer;
         }

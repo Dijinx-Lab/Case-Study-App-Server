@@ -10,6 +10,6 @@ namespace CaseStudyAppServer.Interfaces
     {
         Task<List<Answer>> GetAllByTeamIdAsync(int id);
         Task<List<Answer>> GetAllByQuestionIdAsync(int id);
-        Task<Answer> CreateAsync(Answer answer);
+        Task<List<Answer>> CreateBatchAsync(List<Answer> answers);
     }
 }

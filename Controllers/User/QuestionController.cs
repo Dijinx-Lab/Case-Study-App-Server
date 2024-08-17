@@ -1,4 +1,5 @@
 using CaseStudyAppServer.Constants;
+using CaseStudyAppServer.Dtos.Answers;
 using CaseStudyAppServer.Dtos.Questions;
 using CaseStudyAppServer.Helpers;
 using CaseStudyAppServer.Interfaces;
@@ -45,6 +46,34 @@ namespace CaseStudyAppServer.Controllers.User
                 questionWithAnswers.Add(questionWithAnswer);
             }
             return ResponseUtility.ReturnOk(new { questions = questionWithAnswers });
+        }
+
+        [HttpPost("answer")]
+        public async Task<IActionResult> SubmitAnswer([FromBody] AnswerRequestDto requestDto)
+        {
+            var team = await _teamRepo.GetByCodeAsync(requestDto.Code);
+            if (team == null) return ResponseUtility.ReturnOk(null, MessageConstants.ItemNotFound);
+            int caseStudyId;
+            List<Answer> createdAnswers = [];
+            foreach (var item in requestDto.Answers)
+            {
+                var question = await _questionRepo.GetByIdAsync(item.QuestionId);
+                if (question == null) return ResponseUtility.ReturnOk(null, MessageConstants.ItemNotFound);
+                caseStudyId = question.CaseStudyId;
+                var createdAnswer = item.ToAnswerFromRequestDto();
+                createdAnswer.TeamId = team.Id;
+                createdAnswers.Add(createdAnswer);
+            }
+            var submittedAnswers = await _answerRepo.GetAllByTeamIdAsync(team.Id);
+
+            foreach (var answer in submittedAnswers)
+            {
+                createdAnswers.RemoveAll(x => x.QuestionId == answer.QuestionId);
+            }
+
+            createdAnswers = await _answerRepo.CreateBatchAsync(createdAnswers);
+
+            return ResponseUtility.ReturnOk(new { answers = createdAnswers });
         }
     }
 }
